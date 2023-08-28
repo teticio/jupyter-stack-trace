@@ -11,11 +11,11 @@ span.ansi-green-fg {
 .stack-trace-stack-overflow-btn {
   border: 0;
   font-size: 11px;
-  margin: 0px 4px;
+  margin: 0 4px;
   padding: 6px;
   text-transform: uppercase;
   background-color: #f7f7f7;
-  box-shadow: 0px 3px 4px #aaa;
+  box-shadow: 0 3px 4px #aaa;
   user-select: none;
 }
 
