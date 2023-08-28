@@ -1,7 +1,11 @@
-# jupyter_stack_trace
+# Jupyter Stack Trace
 
 [![Github Actions Status](https://github.com/teticio/jupyter-stack-trace/workflows/Build/badge.svg)](https://github.com/teticio/jupyter-stack-trace/actions/workflows/build.yml)
 A JupyterLab extension to jump to the line in the file of the stack trace.
+
+(Migrated from https://github.com/teticio/nbextension-gotoerror to JupyterLab and Jupyter Notebook 7.)
+
+One of the disadvantages of working with Jupyter Notebooks is that they can be very difficult to debug when something goes wrong deep down in a stack trace. This extension allows you to click on any of the items in the stack trace and opens up the relevant file at the line where the error occured. A button is also added which searches Google for the error in Stack Overflow.
 
 ## Requirements
 
@@ -22,6 +26,28 @@ To remove the extension, execute:
 ```bash
 pip uninstall jupyter_stack_trace
 ```
+
+## Settings
+
+Jupyter is only able to access files in the directory in which it is run or a subdirectory. Therefore, to be able to open a file in the stack trace, it is necessary to provide a soft link from the Jupyter launch directory to package source directories.
+
+Make a soft link in the Jupyter launch directory to a base directory of your Python instalation (e.g., `~/.local/lib/python3.10`) and call this `python3.10`. Then add the prefix `~/.local/lib` in the `jupyter-stack-trace` settings. If you use `pipenv`, for example, then also make a soft link to the `~/.local/share/virtualenvs` called `virtualenvs` and add the prefix `~/.local/share`.
+
+The exact configuration will depend on your setup, but if you find that clicking a filename in the stack trace does not open up the file, then make the soft link to a point somewhere higher up the path and add the corresponding prefix in the settings.
+
+To make a soft link in Linux:
+
+```bash
+ln -s ~/.local/lib/python3.10 python3.10
+```
+
+To make a soft link in Windows:
+
+```cmd
+mklink -d envs C:\users\teticio\Anaconda\python\envs
+```
+
+By default, files are opened as read only, but you can override this in the settings. This allows you to directly modify the packages so you can add temporary debugging code.
 
 ## Contributing
 

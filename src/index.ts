@@ -31,12 +31,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
     console.log('JupyterLab extension jupyter-stack-trace is activated!');
 
     let prefixes: string[] = [];
+    let readOnly = true;
+
     if (settingRegistry) {
       settingRegistry
         .load(plugin.id)
         .then(settings => {
           console.log('jupyter-stack-trace settings loaded:', settings.composite);
           prefixes = settings.get('prefixes').composite as string[];
+          readOnly = settings.get('readOnly').composite as boolean;
         })
         .catch(reason => {
           console.error('Failed to load settings for jupyter-stack-trace.', reason);
@@ -61,7 +64,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
                 const editor = (widget.content as FileEditor).editor;
                 let line_number = Number(line) || 1;
 
-                editor.setOption('readOnly', true);
+                editor.setOption('readOnly', readOnly);
                 editor.setCursorPosition({ line: line_number - 1, column: 0 });
                 editor.setSelection({
                   start: { line: line_number - 1, column: 0 },
@@ -89,7 +92,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
           cell.model.outputs.add({
             output_type: 'display_data',
             data: {
-              'text/html': '<br><button class="stack-trace-stackoverflow-btn" onclick="window.open(\'' + url + '\', \'_blank\');">Search Stack Overflow</button>'
+              'text/html': '<br><button class="stack-trace-stack-overflow-btn" onclick="window.open(\'' + url + '\', \'_blank\');">Search Stack Overflow</button>'
             }
           });
         }

@@ -1,17 +1,23 @@
 {
   "jupyter.lab.shortcuts": [],
   "title": "jupyter-stack-trace",
-  "description": "jupyter-stack-trace settings.",
+  "description": "Make a soft link in the Jupyter launch directory to the a base directory of your Python instalation (e.g., ~/.local/lib/python3.10) and call this python3.10. Then add the prefix ~/.local/lib in the jupyter-stack-trace settings. See https://github.com/teticio/jupyter-stack-trace for more details.",
   "type": "object",
   "properties": {
     "prefixes": {
       "title": "Prefixes",
-      "description": "Array of string prefixes.",
+      "description": "Prefixes to your Python environments.",
       "type": "array",
       "items": {
         "type": "string"
       },
       "default": []
+    },
+    "readOnly": {
+      "title": "Read only",
+      "description": "If true, files are opened as read only.",
+      "type": "boolean",
+      "default": true
     }
   },
   "additionalProperties": false
