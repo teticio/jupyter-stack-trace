@@ -7,3 +7,18 @@
 span.ansi-green-fg {
     cursor: pointer;
 }
+
+.stack-trace-stackoverflow-btn {
+    border: 0;
+    font-size: 11px;
+    margin: 0px 4px;
+    padding: 6px;
+    text-transform: uppercase;
+    background-color: #f7f7f7;
+    box-shadow: 0px 3px 4px #aaa;
+    user-select: none;
+}
+
+.stack-trace-stackoverflow-btn:hover {
+    background-color: #e0e0e0;
+}

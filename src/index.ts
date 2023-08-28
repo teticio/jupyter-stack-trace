@@ -1,7 +1,10 @@
 import '../style/index.css';
 
+import { CodeCell } from '@jupyterlab/cells';
 import { IDocumentManager } from '@jupyterlab/docmanager';
 import { IEditorTracker, FileEditor } from '@jupyterlab/fileeditor';
+import { IOutput } from '@jupyterlab/nbformat';
+import { NotebookActions } from '@jupyterlab/notebook';
 
 import {
   JupyterFrontEnd,
@@ -72,6 +75,27 @@ const plugin: JupyterFrontEndPlugin<void> = {
         }
       }
     });
+
+    NotebookActions.executed.connect((_, args) => {
+      const cell: CodeCell = args.cell as CodeCell;
+      const outputs = cell.model.sharedModel.outputs;
+
+      outputs.forEach((output: IOutput) => {
+        if (output.output_type === 'error') {
+          const stackTrace: string[] = output.traceback as string[] ?? [];
+          const searchText = escape(stackTrace[stackTrace.length - 1].replace(/\x1b\[(.*?)([@-~])/g, ''));
+          const url = 'https://google.com/search?q=' + searchText + '+site:stackoverflow.com';
+
+          cell.model.outputs.add({
+            output_type: 'display_data',
+            data: {
+              'text/html': '<br><button class="stack-trace-stackoverflow-btn" onclick="window.open(\'' + url + '\', \'_blank\');">Search Stack Overflow</button>'
+            }
+          });
+        }
+      });
+    });
+
   }
 }
 
