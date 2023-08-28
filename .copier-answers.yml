@@ -1,0 +1,15 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.2.0
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: teticio@gmail.com
+author_name: Robert Dargavel Smith
+has_binder: false
+has_settings: true
+kind: frontend
+labextension_name: jupyter-stack-trace
+project_short_description: A JupyterLab extension to jump to the line in the file
+    of the stack trace.
+python_name: jupyter_stack_trace
+repository: https://github.com/teticio/jupyter-stack-trace
+test: false
+

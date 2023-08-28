@@ -1,0 +1,18 @@
+{
+  "jupyter.lab.shortcuts": [],
+  "title": "jupyter-stack-trace",
+  "description": "jupyter-stack-trace settings.",
+  "type": "object",
+  "properties": {
+    "prefixes": {
+      "title": "Prefixes",
+      "description": "Array of string prefixes.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  },
+  "additionalProperties": false
+}
