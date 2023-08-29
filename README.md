@@ -1,11 +1,11 @@
 # Jupyter Stack Trace
 
 [![Github Actions Status](https://github.com/teticio/jupyter-stack-trace/workflows/Build/badge.svg)](https://github.com/teticio/jupyter-stack-trace/actions/workflows/build.yml)
-A JupyterLab extension to jump to the line in the file of the stack trace.
+A JupyterLab extension to jump to the line in the file of the stack trace, search Google for the error in Stack Overflow, or ask Bing Chat for help.
 
 (Migrated from https://github.com/teticio/nbextension-gotoerror to JupyterLab and Jupyter Notebook 7.)
 
-One of the disadvantages of working with Jupyter Notebooks is that they can be very difficult to debug when something goes wrong deep down in a stack trace. This extension allows you to click on any of the items in the stack trace and opens up the relevant file at the line where the error occured. A button is also added which searches Google for the error in Stack Overflow.
+One of the disadvantages of working with Jupyter Notebooks is that they can be very difficult to debug when something goes wrong deep down in a stack trace. This extension allows you to click on any of the items in the stack trace and opens up the relevant file at the line where the error occurred. Buttons are also added which search Google for the error in Stack Overflow, or ask Bing Chat for help (for this to work, you must be logged into Bing).
 
 ## Requirements
 

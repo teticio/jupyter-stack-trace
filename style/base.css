@@ -8,7 +8,7 @@ span.ansi-green-fg {
   cursor: pointer;
 }
 
-.stack-trace-stack-overflow-btn {
+.stack-trace-btn {
   border: 0;
   font-size: 11px;
   margin: 0 4px;
@@ -19,6 +19,6 @@ span.ansi-green-fg {
   user-select: none;
 }
 
-.stack-trace-stack-overflow-btn:hover {
+.stack-trace-btn:hover {
   background-color: #e0e0e0;
 }

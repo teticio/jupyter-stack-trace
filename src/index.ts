@@ -101,22 +101,40 @@ const plugin: JupyterFrontEndPlugin<void> = {
       outputs.forEach((output: IOutput) => {
         if (output.output_type === 'error') {
           const stackTrace: string[] = (output.traceback as string[]) ?? [];
-          const searchText = escape(
-            // eslint-disable-next-line no-control-regex
-            stackTrace[stackTrace.length - 1].replace(/\x1b\[(.*?)([@-~])/g, '')
+          const escapedStackTraces = stackTrace.map(item =>
+            escape(
+              // eslint-disable-next-line no-control-regex
+              item.replace(/\x1b\[(.*?)([@-~])/g, '')
+            )
           );
-          const url =
+
+          const stackOverflowUrl =
             'https://google.com/search?q=' +
-            searchText +
+            escapedStackTraces[escapedStackTraces.length - 1] +
             '+site:stackoverflow.com';
+          const stackOverflowButton =
+            '<button class="stack-trace-btn" onclick="window.open(\'' +
+            stackOverflowUrl +
+            "', '_blank');\">Search Stack Overflow</button>";
+          const bingChatUrl =
+            'https://www.bing.com/search?iscopilotedu=1&sendquery=1&q=' +
+            escape('Please help me with the following error:\n') +
+            escapedStackTraces.join('%0A');
+          const bingButton =
+            '<button class="stack-trace-btn" onclick="window.open(\'' +
+            bingChatUrl +
+            "', '_blank');\">Ask Bing Chat</button>";
+          const html =
+            '<table width="100%"><tr><td style="text-align:left;">' +
+            stackOverflowButton +
+            '</td><td style="text-align:right;">' +
+            bingButton +
+            '</td></tr></table>';
 
           cell.model.outputs.add({
             output_type: 'display_data',
             data: {
-              'text/html':
-                '<br><button class="stack-trace-stack-overflow-btn" onclick="window.open(\'' +
-                url +
-                "', '_blank');\">Search Stack Overflow</button>"
+              'text/html': html
             }
           });
         }
