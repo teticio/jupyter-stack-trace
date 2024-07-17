@@ -117,7 +117,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
             stackOverflowUrl +
             "', '_blank');\">Search Stack Overflow</button>";
           const bingChatUrl =
-            'https://www.bing.com/search?iscopilotedu=1&sendquery=1&q=' +
+            'https://www.bing.com/chat?iscopilotedu=1&sendquery=1&q=' +
             escape('Please help me with the following error:\n') +
             escapedStackTraces.join('%0A');
           const bingButton =
