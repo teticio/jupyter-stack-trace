@@ -31,7 +31,7 @@ pip uninstall jupyter_stack_trace
 
 Jupyter is only able to access files in the directory in which it is run or a subdirectory. Therefore, to be able to open a file in the stack trace, it is necessary to provide a soft link from the Jupyter launch directory to package source directories.
 
-Make a soft link in the Jupyter launch directory to a base directory of your Python instalation (e.g., `~/.local/lib/python3.10`) and call this `python3.10`. Then add the prefix `~/.local/lib` in the `jupyter-stack-trace` settings. If you use `pipenv`, for example, then also make a soft link to the `~/.local/share/virtualenvs` called `virtualenvs` and add the prefix `~/.local/share`.
+Make a soft link in the Jupyter launch directory to a base directory of your Python installation (e.g., `~/.local/lib/python3.10`) and call this `python3.10`. Then add the prefix `~/.local/lib` in the `jupyter-stack-trace` settings. If you use `pipenv`, for example, then also make a soft link to the `~/.local/share/virtualenvs` called `virtualenvs` and add the prefix `~/.local/share`.
 
 The exact configuration will depend on your setup, but if you find that clicking a filename in the stack trace does not open up the file, then make the soft link to a point somewhere higher up the path and add the corresponding prefix in the settings.
 

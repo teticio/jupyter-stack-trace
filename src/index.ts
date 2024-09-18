@@ -101,25 +101,30 @@ const plugin: JupyterFrontEndPlugin<void> = {
       outputs.forEach((output: IOutput) => {
         if (output.output_type === 'error') {
           const stackTrace: string[] = (output.traceback as string[]) ?? [];
-          const escapedStackTraces = stackTrace.map(item =>
-            escape(
-              // eslint-disable-next-line no-control-regex
-              item.replace(/\x1b\[(.*?)([@-~])/g, '')
-            )
+          const colourlessStackTraces = stackTrace.map(item =>
+            // eslint-disable-next-line no-control-regex
+            item.replace(/\x1b\[(.*?)([@-~])/g, '')
           );
 
           const stackOverflowUrl =
-            'https://google.com/search?q=' +
-            escapedStackTraces[escapedStackTraces.length - 1] +
+            'https://google.com/search?' +
+            new URLSearchParams({
+              sendquery: '1',
+              q: colourlessStackTraces[colourlessStackTraces.length - 1]
+            }).toString() +
             '+site:stackoverflow.com';
           const stackOverflowButton =
             '<button class="stack-trace-btn" onclick="window.open(\'' +
             stackOverflowUrl +
             "', '_blank');\">Search Stack Overflow</button>";
           const bingChatUrl =
-            'https://www.bing.com/chat?iscopilotedu=1&sendquery=1&q=' +
-            escape('Please help me with the following error:\n') +
-            escapedStackTraces.join('%0A');
+            'https://www.bing.com/chat?' +
+            new URLSearchParams({
+              sendquery: '1',
+              q:
+                'Please help me with the following error:\n' +
+                colourlessStackTraces.join('\n')
+            }).toString();
           const bingButton =
             '<button class="stack-trace-btn" onclick="window.open(\'' +
             bingChatUrl +
